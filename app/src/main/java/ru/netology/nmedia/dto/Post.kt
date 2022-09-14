@@ -6,9 +6,9 @@ data class Post(
     val author: String,
     val content: String,
     val published: String,
-    var likes: Int = 3400,
+    var likes: Int = 34,
     var likedByMe: Boolean = false,
-    var shares: Int = 5300,
+    var shares: Int = 53,
     var shared: Boolean = false
 ) {
 
@@ -17,8 +17,7 @@ data class Post(
             if (likes % 1000 == 0) {
                 return ("${likes / 1000}K")
             } else {
-                var likes = likes / 1000.0
-                return ("%.1f".format(likes) + "K")
+                return ("%.1f".format(likes / 1000.0) + "K")
             }
         }
 
@@ -30,8 +29,7 @@ data class Post(
             if (likes % 1000000 == 0) {
                 return ("${likes / 1000000}M")
             } else {
-                var likes = likes / 1000000.0
-                return ("%.1f".format(likes) + "M")
+                return ("%.1f".format(likes / 1000000.0) + "M")
             }
         }
         return likes.toString()
