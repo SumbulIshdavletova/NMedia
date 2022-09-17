@@ -6,10 +6,10 @@ data class Post(
     val author: String,
     val content: String,
     val published: String,
-    var likes: Int = 34,
-    var likedByMe: Boolean = false,
-    var shares: Int = 53,
-    var shared: Boolean = false
+    val likes: Int = 34,
+    val likedByMe: Boolean = false,
+    val shares: Int = 53,
+    val shared: Boolean = true
 ) {
 
     fun viewFormat(likes: Int): String {
