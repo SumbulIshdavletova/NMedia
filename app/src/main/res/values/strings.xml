@@ -5,4 +5,7 @@
     <string name="description_post_menu">Post menu</string>
     <string name="description_post_like">Like</string>
     <string name="description_post_share">Share</string>
+    <string name="remove">Remove</string>
+    <string name="edit">Edit</string>
+    <string name="editHint">Post text</string>
 </resources>

@@ -6,9 +6,9 @@ data class Post(
     val author: String,
     val content: String,
     val published: String,
-    val likes: Int = 34,
+    val likes: Int,
     val likedByMe: Boolean = false,
-    val shares: Int = 53,
+    val shares: Int,
     val shared: Boolean = true
 ) {
 
