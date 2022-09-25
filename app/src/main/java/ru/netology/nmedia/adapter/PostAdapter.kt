@@ -51,12 +51,14 @@ class PostViewHolder(
             author.text = post.author
             published.text = post.published
             content.text = post.content
-            like.setImageResource(
-                if (post.likedByMe) R.drawable.ic_baseline_favorite_24 else R.drawable.ic_baseline_favorite_border_24
-            )
-            share.setImageResource(R.drawable.ic_baseline_share_24)
-            likeCount?.text = post.viewFormat(post.likes)
-            shareCount?.text = post.viewFormat(post.shares)
+            like.isChecked = post.likedByMe
+            like.text = "${post.likes}"
+            share.isChecked=post.shared
+            share.text = "${post.shares}"
+          //  share.setImageResource(R.drawable.ic_baseline_share_24)
+          //  likeCount?.text = post.viewFormat(post.likes)
+
+        //    shareCount?.text = post.viewFormat(post.shares)
             like.setOnClickListener {
                 onInteractionListener.onLike(post)
             }

@@ -60,9 +60,8 @@ class MainActivity : AppCompatActivity() {
                     requestFocus()
                     text = post.content
                 }
-
-               }
             }
+        }
 
         binding.cancel.setOnClickListener {
             AndroidUtils.hideKeyboard(it)
