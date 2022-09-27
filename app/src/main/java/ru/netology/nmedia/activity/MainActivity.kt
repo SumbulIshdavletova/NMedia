@@ -1,8 +1,10 @@
 package ru.netology.nmedia.activity
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.activity.result.launch
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
@@ -25,7 +27,14 @@ class MainActivity : AppCompatActivity() {
         val viewModel: PostViewModel by viewModels()
         val adapter = PostsAdapter(object : OnInteractionListener {
             override fun onShare(post: Post) {
-                viewModel.shareById(post.id)
+                val intent = Intent().apply {
+                    action = Intent.ACTION_SEND
+                    putExtra(Intent.EXTRA_TEXT, post.content)
+                    type = "text/plain"
+                }
+                val shareIntent =
+                    Intent.createChooser(intent, getString(R.string.chooser_share_post))
+                startActivity(shareIntent)
             }
 
             override fun onEdit(post: Post) {
@@ -48,50 +57,61 @@ class MainActivity : AppCompatActivity() {
             adapter.submitList(posts)
         }
 
-        viewModel.edited.observe(this) { post ->
-            if (post.id == 0L) {
-                return@observe
-            } else {
-                with(binding.content) {
-                    requestFocus()
-                    setText(post.content)
-                }
-                with(binding.editedText) {
-                    requestFocus()
-                    text = post.content
-                }
-            }
+        val newPostLauncher = registerForActivityResult(NewPostResultContract()) { result ->
+            result ?: return@registerForActivityResult
+            viewModel.changeContent(result)
+            viewModel.save()
         }
 
-        binding.cancel.setOnClickListener {
-            AndroidUtils.hideKeyboard(it)
-            group.visibility = View.GONE
-            with(binding.content) {
-                setText("")
-                clearFocus()
-                AndroidUtils.hideKeyboard(this)
-            }
+        binding.fab.setOnClickListener{
+            newPostLauncher.launch()
         }
 
-        binding.save.setOnClickListener {
-            with(binding.content) {
-                if (text.isNullOrBlank()) {
-                    Toast.makeText(
-                        this@MainActivity,
-                        "Content can't be empty",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                    return@setOnClickListener
-                }
-                viewModel.changeContent(text.toString())
-                viewModel.save()
-
-                setText("")
-                clearFocus()
-                AndroidUtils.hideKeyboard(this)
-                group.visibility = View.GONE
-            }
-        }
+//
+//        viewModel.edited.observe(this) { post ->
+//            if (post.id == 0L) {
+//                return@observe
+//            } else {
+//                with(binding.content) {
+//                    requestFocus()
+//                    setText(post.content)
+//                }
+//                with(binding.editedText) {
+//                    requestFocus()
+//                    text = post.content
+//                }
+//            }
+//        }
+//
+//        binding.cancel.setOnClickListener {
+//            AndroidUtils.hideKeyboard(it)
+//            group.visibility = View.GONE
+//            with(binding.content) {
+//                setText("")
+//                clearFocus()
+//                AndroidUtils.hideKeyboard(this)
+//            }
+//        }
+//
+//        binding.save.setOnClickListener {
+//            with(binding.content) {
+//                if (text.isNullOrBlank()) {
+//                    Toast.makeText(
+//                        this@MainActivity,
+//                        "Content can't be empty",
+//                        Toast.LENGTH_SHORT
+//                    ).show()
+//                    return@setOnClickListener
+//                }
+//                viewModel.changeContent(text.toString())
+//                viewModel.save()
+//
+//                setText("")
+//                clearFocus()
+//                AndroidUtils.hideKeyboard(this)
+//                group.visibility = View.GONE
+//            }
+//        }
 
 
     }
