@@ -9,4 +9,5 @@
     <string name="remove">Удалить</string>
     <string name="edit">Редактировать</string>
     <string name="editHint">Текст поста</string>
+    <string name="edit_here">Редактировать</string>
 </resources>
