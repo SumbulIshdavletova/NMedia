@@ -68,6 +68,7 @@ class MainActivity : AppCompatActivity() {
             AndroidUtils.hideKeyboard(it)
             group.visibility = View.GONE
             with(binding.content) {
+                viewModel.save()
                 setText("")
                 clearFocus()
                 AndroidUtils.hideKeyboard(this)

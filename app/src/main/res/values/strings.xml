@@ -8,4 +8,5 @@
     <string name="remove">Remove</string>
     <string name="edit">Edit</string>
     <string name="editHint">Post text</string>
+    <string name="edit_here">Edit</string>
 </resources>
