@@ -7,14 +7,13 @@ import android.widget.Toast
 import com.google.android.material.snackbar.BaseTransientBottomBar.LENGTH_INDEFINITE
 import com.google.android.material.snackbar.Snackbar
 import ru.netology.nmedia.R
-import ru.netology.nmedia.databinding.ActivityMainBinding
+import ru.netology.nmedia.databinding.ActivityIntentHandlerBinding
 
-class IntentHandlerActivity : AppCompatActivity() {
+class  IntentHandlerActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_intent_handler2)
 
-        val binding = ActivityMainBinding.inflate(layoutInflater)
+        val binding = ActivityIntentHandlerBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         intent?.let {

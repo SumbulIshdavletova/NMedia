@@ -10,11 +10,14 @@ import ru.netology.nmedia.databinding.ActivityNewPostBinding
 class NewPostActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         val binding = ActivityNewPostBinding.inflate(layoutInflater)
         setContentView(binding.root)
         binding.edit.requestFocus()
+        val text = intent.getStringExtra(Intent.EXTRA_TEXT)
+        binding.edit.setText(text)
         binding.ok.setOnClickListener {
-            val intent= Intent()
+            val intent = Intent()
             if (binding.edit.text.isNullOrBlank()) {
                 setResult(Activity.RESULT_CANCELED, intent)
             } else {

@@ -1,15 +1,19 @@
 package ru.netology.nmedia.dto
 
+import java.net.URL
+
 
 data class Post(
     val id: Long,
     val author: String,
     val content: String,
     val published: String,
-    val likes: Int,
+    val likes: Int = 0,
     val likedByMe: Boolean = false,
     val shares: Int,
-    val shared: Boolean = false
+    val shared: Boolean = false,
+    val video: String? = null,
+    val videoName: String? = null
 ) {
 
     fun viewFormat(likes: Int): String {
