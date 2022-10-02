@@ -52,9 +52,9 @@ class PostViewHolder(
             published.text = post.published
             content.text = post.content
             like.isChecked = post.likedByMe
-            like.text = "${post.likes}"
+            like.text = post.viewFormat(post.likes)
             share.isChecked=post.shared
-            share.text = "${post.shares}"
+            share.text = post.viewFormat(post.shares)
           //  share.setImageResource(R.drawable.ic_baseline_share_24)
           //  likeCount?.text = post.viewFormat(post.likes)
 
