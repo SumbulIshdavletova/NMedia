@@ -13,8 +13,7 @@
         android:gravity="start|top"
         android:inputType="textMultiLine"
         android:background="@android:color/transparent"
-        android:hint="@string/add_post"
-        />
+        android:autofillHints="@string/add_post" />
 
     <com.google.android.material.bottomappbar.BottomAppBar
         android:id="@+id/bottomAppBar"

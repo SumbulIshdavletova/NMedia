@@ -3,19 +3,13 @@ package ru.netology.nmedia.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.result.launch
 import androidx.appcompat.widget.PopupMenu
-//import android.widget.ListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.card_post.view.*
 import ru.netology.nmedia.R
-import ru.netology.nmedia.activity.NewPostResultContract
-import ru.netology.nmedia.databinding.ActivityMainBinding
 import ru.netology.nmedia.databinding.CardPostBinding
 import ru.netology.nmedia.dto.Post
-import java.util.*
 
 interface OnInteractionListener {
     fun onLike(post: Post) {}
@@ -53,18 +47,16 @@ class PostViewHolder(
             published.text = post.published
             content.text = post.content
             like.isChecked = post.likedByMe
-            like.text = "${post.likes}"
+            like.text = post.viewFormat(post.likes)
             share.isChecked = post.shared
-            share.text = "${post.shares}"
-
-//            share.setImageResource(R.drawable.ic_baseline_share_24)
-//            likeCount?.text = post.viewFormat(post.likes)
-//            shareCount?.text = post.viewFormat(post.shares)
-
+            share.text = post.viewFormat(post.shares)
 
             if (post.video != null) {
                 videoGroup.visibility = View.VISIBLE
                 youtubeThumbnail.setOnClickListener {
+                    onInteractionListener.videoIntent(post)
+                }
+                playVideo.setOnClickListener {
                     onInteractionListener.videoIntent(post)
                 }
             } else {

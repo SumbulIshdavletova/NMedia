@@ -12,6 +12,7 @@ import ru.netology.nmedia.databinding.ActivityMainBinding
 import ru.netology.nmedia.dto.Post
 import ru.netology.nmedia.viewmodel.PostViewModel
 
+
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,9 +25,10 @@ class MainActivity : AppCompatActivity() {
 
         val adapter = PostsAdapter(object : OnInteractionListener {
             override fun videoIntent(post: Post) {
-                val intent = Intent(Intent.ACTION_VIEW)
-
-                intent.setPackage("com.google.android.youtube")
+                val intent = Intent(
+                    Intent.ACTION_VIEW,
+                    Uri.parse("com.google.android.youtube")
+                )
                 intent.data = Uri.parse(post.video)
 
                 startActivity(intent)

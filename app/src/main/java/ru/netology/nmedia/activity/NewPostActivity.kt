@@ -4,7 +4,6 @@ import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import ru.netology.nmedia.R
 import ru.netology.nmedia.databinding.ActivityNewPostBinding
 
 class NewPostActivity : AppCompatActivity() {
@@ -16,6 +15,7 @@ class NewPostActivity : AppCompatActivity() {
         binding.edit.requestFocus()
         val text = intent.getStringExtra(Intent.EXTRA_TEXT)
         binding.edit.setText(text)
+
         binding.ok.setOnClickListener {
             val intent = Intent()
             if (binding.edit.text.isNullOrBlank()) {
