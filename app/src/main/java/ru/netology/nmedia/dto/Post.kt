@@ -9,7 +9,7 @@ data class Post(
     val likes: Int,
     val likedByMe: Boolean = false,
     val shares: Int,
-    val shared: Boolean = true
+    val shared: Boolean = false
 ) {
 
     fun viewFormat(likes: Int): String {
