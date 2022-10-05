@@ -16,18 +16,28 @@ import ru.netology.nmedia.viewmodel.PostViewModel
 
 class NewPostFragment : Fragment() {
 
+    companion object {
+        var Bundle.textArg: String? by StringArg
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val binding = FragmentNewPostBinding.inflate(inflater, container, false)
-        arguments?.textArg.let {
+        val binding = FragmentNewPostBinding.inflate(
+            inflater,
+            container,
+            false
+        )
+
+        arguments?.textArg?.let {
             binding.edit.setText(it)
         }
         // то же самое что и выше но проще arguments?.textArg.let(binding.edit::setText)
 
-        val viewModel: PostViewModel by viewModels<PostViewModel>(ownerProducer = ::requireParentFragment)
+        val viewModel: PostViewModel by viewModels<PostViewModel>(
+            ownerProducer = ::requireParentFragment)
 
         binding.edit.requestFocus()
 
@@ -41,7 +51,4 @@ class NewPostFragment : Fragment() {
         return binding.root
     }
 
-    companion object {
-        var Bundle.textArg: String? by StringArg
-    }
 }

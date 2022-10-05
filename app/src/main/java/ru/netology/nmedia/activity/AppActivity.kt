@@ -30,9 +30,7 @@ class AppActivity : AppCompatActivity() {
                 return@let
             }
             intent.removeExtra(Intent.EXTRA_TEXT)
-            val navHostFragment =
-                supportFragmentManager.findFragmentById(R.id.fragment_container) as NavHostFragment
-            navHostFragment.navController.navigate(
+            findNavController(R.id.fragment_container).navigate(
                 R.id.action_feedFragment_to_newPostFragment,
                 Bundle().apply { textArg = text }
             )

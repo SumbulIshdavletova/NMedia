@@ -23,9 +23,15 @@ class FeedFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val binding = FragmentFeedBinding.inflate(inflater, container,false)
+        val binding = FragmentFeedBinding.inflate(
+            inflater,
+            container,
+            false
+        )
 
-        val viewModel: PostViewModel by viewModels<PostViewModel>( ownerProducer = ::requireParentFragment)
+        val viewModel: PostViewModel by viewModels<PostViewModel>(
+            ownerProducer = ::requireParentFragment
+        )
 
         val adapter = PostsAdapter(object : OnInteractionListener {
             override fun onShare(post: Post) {
@@ -33,7 +39,7 @@ class FeedFragment : Fragment() {
                     action = Intent.ACTION_SEND
                     putExtra(Intent.EXTRA_TEXT, post.content)
                     type = "text/plain"
-            }
+                }
                 val shareIntent =
                     Intent.createChooser(intent, getString(R.string.chooser_share_post))
                 startActivity(shareIntent)
