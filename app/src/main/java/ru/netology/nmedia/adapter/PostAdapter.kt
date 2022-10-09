@@ -18,6 +18,7 @@ interface OnInteractionListener {
     fun onRemove(post: Post) {}
     fun onEdit(post: Post) {}
     fun onClick(post: Post) {}
+    fun videoIntent(post: Post) {}
 }
 
 class PostsAdapter(
@@ -81,6 +82,20 @@ class PostViewHolder(
             itemView.setOnClickListener {
                 onInteractionListener.onClick(post)
             }
+
+            if (post.video != null) {
+                videoGroup.visibility = View.VISIBLE
+                youtubeThumbnail.setOnClickListener {
+                    onInteractionListener.videoIntent(post)
+                }
+                playVideo.setOnClickListener {
+                    onInteractionListener.videoIntent(post)
+                }
+            } else {
+                videoGroup.visibility = View.GONE
+            }
+
+
         }
     }
 }

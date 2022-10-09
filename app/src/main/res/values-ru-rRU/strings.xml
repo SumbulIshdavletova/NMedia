@@ -14,4 +14,8 @@
     <string name="error_empty_content">Пост не может быть пустым</string>
     <string name="add_post">Добавить пост</string>
     <string name="edit_post">Редактировать пост</string>
+    <string name="play_video">Play_video</string>
+    <string name="random_number">127</string>
+    <string name="test_video_title">Video title</string>
+    <string name="description_video">Attached video</string>
 </resources>

@@ -85,6 +85,57 @@
         app:barrierDirection="bottom"
         app:constraint_referenced_ids="content" />
 
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/video_group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        app:constraint_referenced_ids="play_video, youtube_thumbnail, video_views, video_name" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/play_video"
+        style="@style/Widget.AppTheme.LikeButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/common_spacing"
+        android:checkable="true"
+        android:contentDescription="@string/play_video"
+        app:icon="@drawable/ic_play_circle_24"
+        app:layout_constraintStart_toStartOf="@id/youtube_thumbnail"
+        app:layout_constraintEnd_toEndOf="@id/youtube_thumbnail"
+        app:layout_constraintBottom_toBottomOf="@id/youtube_thumbnail"
+        app:layout_constraintTop_toTopOf="@id/youtube_thumbnail"
+        app:layout_constraintTop_toBottomOf="@id/image_barrier"
+        />
+
+    <ImageView
+        android:id="@+id/youtube_thumbnail"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/standartYoutubeHeight"
+        app:layout_constraintTop_toBottomOf="@id/footer"
+        android:contentDescription="@string/description_video" />
+
+    <TextView
+        android:id="@+id/video_name"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="@string/test_video_title"
+        app:layout_constraintTop_toBottomOf="@id/youtube_thumbnail" />
+
+    <TextView
+        android:id="@+id/video_views"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="@string/random_number"
+        app:layout_constraintTop_toBottomOf="@id/video_name" />
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/image_barrier"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="bottom"
+        app:constraint_referenced_ids="video_views" />
+
     <com.google.android.material.button.MaterialButton
         android:id="@+id/like"
         style="@style/Widget.AppTheme.LikeButton"
@@ -95,7 +146,7 @@
         android:contentDescription="@string/description_post_like"
         app:icon="@drawable/ic_like_24dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/footer"
+        app:layout_constraintTop_toBottomOf="@id/image_barrier"
         tools:checked="@sample/posts.json/data/likedByMe"
         tools:text="@sample/posts.json/data/likes" />
 
@@ -118,7 +169,7 @@
         android:contentDescription="@string/description_post_share"
         app:icon="@drawable/ic_baseline_share_24"
         app:layout_constraintStart_toEndOf="@+id/like"
-        app:layout_constraintTop_toBottomOf="@id/footer"
+        app:layout_constraintTop_toBottomOf="@id/image_barrier"
         tools:checked="@sample/posts.json/data/share"
         tools:text="@sample/posts.json/data/shares" />
 
@@ -140,7 +191,7 @@
         android:background="@android:color/transparent"
         android:contentDescription="@string/description_post_share"
         app:layout_constraintEnd_toStartOf="@id/viewsCount"
-        app:layout_constraintTop_toBottomOf="@id/footer"
+        app:layout_constraintTop_toBottomOf="@id/image_barrier"
         app:srcCompat="@drawable/ic_baseline_remove_red_eye_24" />
 
     <TextView

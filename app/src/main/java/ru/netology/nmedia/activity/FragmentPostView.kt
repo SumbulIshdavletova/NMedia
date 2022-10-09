@@ -1,6 +1,7 @@
 package ru.netology.nmedia.activity
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,9 +9,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import kotlinx.android.synthetic.main.fragment_post.*
 import ru.netology.nmedia.R
-import ru.netology.nmedia.activity.NewPostFragment.Companion.textArg
 import ru.netology.nmedia.adapter.OnInteractionListener
 import ru.netology.nmedia.adapter.PostViewHolder
 import ru.netology.nmedia.databinding.FragmentPostBinding
@@ -68,9 +67,18 @@ class FragmentPostView : Fragment() {
                 viewModel.removeById(post.id)
             }
 
+            override fun videoIntent(post: Post) {
+                val intent = Intent(
+                    Intent.ACTION_VIEW,
+                    Uri.parse("com.google.android.youtube")
+                )
+                intent.data = Uri.parse(post.video)
+
+                startActivity(intent)
+            }
+
         })
 
-        val postId = arguments?.textArg?.toLong()
 
         viewModel.data.observe(viewLifecycleOwner) { posts ->
             val post = posts.find { it.id == arguments?.textArg?.toLong() } ?: run {
