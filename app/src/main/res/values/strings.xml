@@ -9,14 +9,6 @@
     <string name="remove">Remove</string>
     <string name="edit">Edit</string>
     <string name="edit_here">Post text</string>
-    <string name="chooser_share_post">Share post</string>
-    <string name="error_empty_content">Content can\'t be empty</string>
-    <string name="add_post">Add post</string>
-    <string name="edit_post">Edit post</string>
-    <string name="play_video">Play_video</string>
-    <string name="random_number">127</string>
-    <string name="test_video_title">Video title</string>
-    <string name="description_video">Attached video</string>
     <string name="editHint">Post text</string>
     <string name="chooser_share_post">Share post</string>
     <string name="error_empty_content">Content can\'t be empty</string>

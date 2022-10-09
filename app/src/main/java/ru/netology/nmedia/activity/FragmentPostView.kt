@@ -79,7 +79,6 @@ class FragmentPostView : Fragment() {
 
         })
 
-
         viewModel.data.observe(viewLifecycleOwner) { posts ->
             val post = posts.find { it.id == arguments?.textArg?.toLong() } ?: run {
                 findNavController().navigateUp()

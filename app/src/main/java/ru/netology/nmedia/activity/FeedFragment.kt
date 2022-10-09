@@ -71,6 +71,7 @@ class FeedFragment : Fragment() {
                         textArg = post.id.toString()
                     })
             }
+
             override fun videoIntent(post: Post) {
                 val intent = Intent(
                     Intent.ACTION_VIEW,
@@ -85,7 +86,6 @@ class FeedFragment : Fragment() {
         viewModel.data.observe(viewLifecycleOwner) { posts ->
             adapter.submitList(posts)
         }
-
 
 
         binding.fab.setOnClickListener {

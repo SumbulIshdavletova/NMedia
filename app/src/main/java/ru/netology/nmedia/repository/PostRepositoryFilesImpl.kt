@@ -100,7 +100,8 @@ class PostRepositoryFilesImpl(val context: Context) : PostRepository {
                     published = "22 сентября в 10:14",
                     likedByMe = false,
                     likes = 12,
-                    shares = 11
+                    shares = 11,
+                    video = "https://www.youtube.com/watch?v=WhWc3b3KhnY"
                 ),
                 Post(
                     id = nextId++,
