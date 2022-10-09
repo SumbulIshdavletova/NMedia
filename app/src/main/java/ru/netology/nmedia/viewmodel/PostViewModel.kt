@@ -45,4 +45,8 @@ class PostViewModel(application: Application) : AndroidViewModel(application) {
         edited.value = post
     }
 
+    fun url(post: Post): String? {
+        return post.video
+    }
+
 }

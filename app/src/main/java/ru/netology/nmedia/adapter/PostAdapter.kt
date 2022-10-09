@@ -4,13 +4,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.PopupMenu
+//import android.widget.ListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import kotlinx.android.synthetic.main.card_post.view.*
 import ru.netology.nmedia.R
+import ru.netology.nmedia.databinding.ActivityMainBinding
 import ru.netology.nmedia.databinding.CardPostBinding
 import ru.netology.nmedia.dto.Post
-
+import java.util.*
 
 interface OnInteractionListener {
     fun onLike(post: Post) {}
@@ -27,19 +30,21 @@ class PostsAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostViewHolder {
         val binding = CardPostBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return PostViewHolder(binding, onInteractionListener)
+        return PostViewHolder(binding,  onInteractionListener)
     }
 
     override fun onBindViewHolder(holder: PostViewHolder, position: Int) {
         val post = getItem(position)
         holder.bind(post)
     }
+
 }
 
 class PostViewHolder(
     private val binding: CardPostBinding,
     private val onInteractionListener: OnInteractionListener
 ) : RecyclerView.ViewHolder(binding.root) {
+
 
 
     fun bind(post: Post) {
@@ -51,6 +56,22 @@ class PostViewHolder(
             like.text = post.viewFormat(post.likes)
             share.isChecked = post.shared
             share.text = post.viewFormat(post.shares)
+            like.text = post.viewFormat(post.likes)
+            share.isChecked = post.shared
+            share.text = post.viewFormat(post.shares)
+
+            if (post.video != null) {
+                videoGroup.visibility = View.VISIBLE
+                youtubeThumbnail.setOnClickListener {
+                    onInteractionListener.videoIntent(post)
+                }
+                playVideo.setOnClickListener {
+                    onInteractionListener.videoIntent(post)
+                }
+            } else {
+                videoGroup.visibility = View.GONE
+            }
+
             like.setOnClickListener {
                 onInteractionListener.onLike(post)
             }
