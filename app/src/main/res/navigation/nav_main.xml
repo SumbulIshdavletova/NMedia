@@ -13,10 +13,22 @@
         <action
             android:id="@+id/action_feedFragment_to_newPostFragment"
             app:destination="@id/newPostFragment" />
+        <action
+            android:id="@+id/action_feedFragment_to_fragmentPostView"
+            app:destination="@id/fragmentPostView" />
     </fragment>
     <fragment
         android:id="@+id/newPostFragment"
         android:name="ru.netology.nmedia.activity.NewPostFragment"
         android:label="fragment_new_post"
         tools:layout="@layout/fragment_new_post" />
+    <fragment
+        android:id="@+id/fragmentPostView"
+        android:name="ru.netology.nmedia.activity.FragmentPostView"
+        android:label="fragment_post"
+        tools:layout="@layout/fragment_post" >
+        <action
+            android:id="@+id/action_fragmentPostView_to_newPostFragment"
+            app:destination="@id/newPostFragment" />
+    </fragment>
 </navigation>

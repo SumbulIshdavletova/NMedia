@@ -7,18 +7,17 @@ import androidx.appcompat.widget.PopupMenu
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.card_post.view.*
 import ru.netology.nmedia.R
 import ru.netology.nmedia.databinding.CardPostBinding
 import ru.netology.nmedia.dto.Post
-import java.util.*
+
 
 interface OnInteractionListener {
     fun onLike(post: Post) {}
     fun onShare(post: Post) {}
     fun onRemove(post: Post) {}
     fun onEdit(post: Post) {}
-    fun cancelEdit(post: Post) {}
+    fun onClick(post: Post) {}
 }
 
 class PostsAdapter(
@@ -27,21 +26,19 @@ class PostsAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostViewHolder {
         val binding = CardPostBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return PostViewHolder(binding,  onInteractionListener)
+        return PostViewHolder(binding, onInteractionListener)
     }
 
     override fun onBindViewHolder(holder: PostViewHolder, position: Int) {
         val post = getItem(position)
         holder.bind(post)
     }
-
 }
 
 class PostViewHolder(
     private val binding: CardPostBinding,
     private val onInteractionListener: OnInteractionListener
 ) : RecyclerView.ViewHolder(binding.root) {
-
 
 
     fun bind(post: Post) {
@@ -51,12 +48,8 @@ class PostViewHolder(
             content.text = post.content
             like.isChecked = post.likedByMe
             like.text = post.viewFormat(post.likes)
-            share.isChecked=post.shared
+            share.isChecked = post.shared
             share.text = post.viewFormat(post.shares)
-          //  share.setImageResource(R.drawable.ic_baseline_share_24)
-          //  likeCount?.text = post.viewFormat(post.likes)
-
-        //    shareCount?.text = post.viewFormat(post.shares)
             like.setOnClickListener {
                 onInteractionListener.onLike(post)
             }
@@ -83,6 +76,10 @@ class PostViewHolder(
                     }
 
                 }.show()
+            }
+
+            itemView.setOnClickListener {
+                onInteractionListener.onClick(post)
             }
         }
     }

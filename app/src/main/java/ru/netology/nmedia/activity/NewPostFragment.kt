@@ -10,14 +10,18 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import ru.netology.nmedia.adapter.OnInteractionListener
+import ru.netology.nmedia.adapter.PostViewHolder
 import ru.netology.nmedia.databinding.FragmentNewPostBinding
+import ru.netology.nmedia.dto.Post
+import ru.netology.nmedia.util.AndroidUtils
 import ru.netology.nmedia.util.StringArg
 import ru.netology.nmedia.viewmodel.PostViewModel
 
 class NewPostFragment : Fragment() {
 
     companion object {
-        var Bundle.textArg: String? by StringArg
+        var Bundle.textArg by StringArg
     }
 
     override fun onCreateView(
@@ -31,13 +35,11 @@ class NewPostFragment : Fragment() {
             false
         )
 
-        arguments?.textArg?.let {
-            binding.edit.setText(it)
-        }
-        // то же самое что и выше но проще arguments?.textArg.let(binding.edit::setText)
+        arguments?.textArg?.let(binding.edit::setText)
 
-        val viewModel: PostViewModel by viewModels<PostViewModel>(
-            ownerProducer = ::requireParentFragment)
+        val viewModel by viewModels<PostViewModel>(
+            ownerProducer = ::requireParentFragment
+        )
 
         binding.edit.requestFocus()
 
@@ -45,9 +47,11 @@ class NewPostFragment : Fragment() {
             val text = binding.edit.text.toString()
             if (text.isNotBlank()) {
                 viewModel.changeContentAndSave(text)
+                AndroidUtils.hideKeyboard(requireView())
             }
             findNavController().navigateUp()
         }
+
         return binding.root
     }
 

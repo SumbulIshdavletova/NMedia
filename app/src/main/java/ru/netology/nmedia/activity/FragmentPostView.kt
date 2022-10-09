@@ -5,45 +5,41 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import kotlinx.android.synthetic.main.card_post.*
-import kotlinx.android.synthetic.main.card_post.view.*
-import kotlinx.android.synthetic.main.fragment_feed.*
 import kotlinx.android.synthetic.main.fragment_post.*
-import kotlinx.android.synthetic.main.fragment_post.view.*
 import ru.netology.nmedia.R
 import ru.netology.nmedia.activity.NewPostFragment.Companion.textArg
 import ru.netology.nmedia.adapter.OnInteractionListener
 import ru.netology.nmedia.adapter.PostViewHolder
-import ru.netology.nmedia.adapter.PostsAdapter
-import ru.netology.nmedia.databinding.FragmentFeedBinding
+import ru.netology.nmedia.databinding.FragmentPostBinding
 import ru.netology.nmedia.dto.Post
 import ru.netology.nmedia.util.StringArg
 import ru.netology.nmedia.viewmodel.PostViewModel
 
-class FeedFragment : Fragment() {
 
+class FragmentPostView : Fragment() {
 
-    val viewModel by viewModels<PostViewModel>(
-        ownerProducer = ::requireParentFragment
-    )
+    companion object {
+        var Bundle.textArg: String? by StringArg
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val binding = FragmentFeedBinding.inflate(
+        val binding = FragmentPostBinding.inflate(
             inflater,
             container,
             false
         )
+        val viewModel by viewModels<PostViewModel>(
+            ownerProducer = ::requireParentFragment
+        )
 
-
-        val adapter = PostsAdapter(object : OnInteractionListener {
+        val viewHolder = PostViewHolder(binding.post, object : OnInteractionListener {
             override fun onShare(post: Post) {
                 val intent = Intent().apply {
                     action = Intent.ACTION_SEND
@@ -58,7 +54,7 @@ class FeedFragment : Fragment() {
             override fun onEdit(post: Post) {
                 viewModel.edit(post)
                 findNavController().navigate(
-                    R.id.action_feedFragment_to_newPostFragment,
+                    R.id.action_fragmentPostView_to_newPostFragment,
                     Bundle().apply {
                         textArg = post.content
                     })
@@ -72,29 +68,21 @@ class FeedFragment : Fragment() {
                 viewModel.removeById(post.id)
             }
 
-            override fun onClick(post: Post) {
-                //       Toast.makeText(context,"post ${post.content}", Toast.LENGTH_SHORT).show()
-                findNavController().navigate(
-                    R.id.action_feedFragment_to_fragmentPostView,
-                    Bundle().apply {
-                        textArg = post.id.toString()
-                    })
-            }
-
         })
 
-        binding.list.adapter = adapter
+        val postId = arguments?.textArg?.toLong()
+
         viewModel.data.observe(viewLifecycleOwner) { posts ->
-            adapter.submitList(posts)
-        }
-
-
-
-        binding.fab.setOnClickListener {
-            findNavController().navigate(R.id.action_feedFragment_to_newPostFragment)
+            val post = posts.find { it.id == arguments?.textArg?.toLong() } ?: run {
+                findNavController().navigateUp()
+                return@observe
+            }
+            viewHolder.bind(post)
         }
 
         return binding.root
     }
+
 }
+
 
