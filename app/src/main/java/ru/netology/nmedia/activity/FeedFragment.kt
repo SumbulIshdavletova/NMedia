@@ -19,7 +19,6 @@ import ru.netology.nmedia.viewmodel.PostViewModel
 
 class FeedFragment : Fragment() {
 
-
     val viewModel by viewModels<PostViewModel>(
         ownerProducer = ::requireParentFragment
     )
@@ -37,6 +36,7 @@ class FeedFragment : Fragment() {
 
         val adapter = PostsAdapter(object : OnInteractionListener {
             override fun onShare(post: Post) {
+                viewModel.shareById(post.id)
                 val intent = Intent().apply {
                     action = Intent.ACTION_SEND
                     putExtra(Intent.EXTRA_TEXT, post.content)
@@ -73,6 +73,7 @@ class FeedFragment : Fragment() {
             }
 
             override fun videoIntent(post: Post) {
+                viewModel.url(post)
                 val intent = Intent(
                     Intent.ACTION_VIEW,
                     Uri.parse("com.google.android.youtube")
@@ -83,6 +84,7 @@ class FeedFragment : Fragment() {
         })
 
         binding.list.adapter = adapter
+
         viewModel.data.observe(viewLifecycleOwner) { posts ->
             adapter.submitList(posts)
         }

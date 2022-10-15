@@ -51,9 +51,6 @@ class PostViewHolder(
             like.text = post.viewFormat(post.likes)
             share.isChecked = post.shared
             share.text = post.viewFormat(post.shares)
-            like.text = post.viewFormat(post.likes)
-            share.isChecked = post.shared
-            share.text = post.viewFormat(post.shares)
 
             like.setOnClickListener {
                 onInteractionListener.onLike(post)
