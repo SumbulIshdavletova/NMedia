@@ -10,8 +10,7 @@ data class Post(
     val likedByMe: Boolean = false,
     val shares: Int,
     val shared: Boolean = false,
-    val video: String? = null,
-    val videoName: String? = null
+    val video: String? = null
 ) {
 
     fun viewFormat(likes: Int): String {

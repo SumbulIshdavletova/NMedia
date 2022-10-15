@@ -21,8 +21,8 @@ class PostDaoImpl(private val db: SQLiteDatabase) : PostDao {
         """.trimIndent()
 
         val testPost = """INSERT INTO posts 
-            (author, content, published, likedByMe, likes, shares)
-            VALUES ("user1", "test text from user1", "yesterday", true, 2, 3)
+            (author, content, published)
+            VALUES ("user1", "test text from user1", "yesterday"
         )"""
     }
 
@@ -42,7 +42,7 @@ class PostDaoImpl(private val db: SQLiteDatabase) : PostDao {
             COLUMN_PUBLISHED,
             COLUMN_LIKED_BY_ME,
             COLUMN_LIKES,
-            COLUMN_SHARES,
+            COLUMN_SHARES
         )
     }
 

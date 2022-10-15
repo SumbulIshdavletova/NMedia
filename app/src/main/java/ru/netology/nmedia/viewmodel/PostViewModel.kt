@@ -14,8 +14,7 @@ private val empty = Post(
     published = "",
     likes = 0,
     shares = 0,
-    video = null,
-    videoName = null
+    video = null
 )
 
 
