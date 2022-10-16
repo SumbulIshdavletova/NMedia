@@ -49,6 +49,7 @@ class PostViewHolder(
             content.text = post.content
             like.isChecked = post.likedByMe
             like.text = post.viewFormat(post.likes)
+
             share.isChecked = post.shared
             share.text = post.viewFormat(post.shares)
 
@@ -96,8 +97,6 @@ class PostViewHolder(
             } else {
                 videoGroup.visibility = View.GONE
             }
-
-
         }
     }
 }
