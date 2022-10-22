@@ -36,7 +36,12 @@ class FCMService : FirebaseMessagingService() {
         message.data[action]?.let {
             when (Action.getValidAction(it)) {
                 Action.LIKE -> handleLike(gson.fromJson(message.data[content], Like::class.java))
-                Action.NEW_POST -> handleNewPost(gson.fromJson(message.data[content], NewPost::class.java))
+                Action.NEW_POST -> handleNewPost(
+                    gson.fromJson(
+                        message.data[content],
+                        NewPost::class.java
+                    )
+                )
                 Action.ERROR -> println("PUSH ERROR")
             }
         }
@@ -75,8 +80,10 @@ class FCMService : FirebaseMessagingService() {
                 )
             )
             .setContentTitle(content.postTopic)
-            .setStyle(NotificationCompat.BigTextStyle()
-                    .bigText(content.postText))
+            .setStyle(
+                NotificationCompat.BigTextStyle()
+                    .bigText(content.postText)
+            )
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
             .build()
 
