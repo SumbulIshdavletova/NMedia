@@ -17,21 +17,17 @@ data class Post(
         if (likes in 1000..9999) {
             if (likes % 1000 == 0) {
                 return ("${likes / 1000}K")
-            } else {
-                return ("%.1f".format(likes / 1000.0) + "K")
             }
+            return ("%.1f".format(likes / 1000.0) + "K")
         }
 
-        if (likes in 10000..999999) {
-            return ("${likes / 1000}K")
-        }
+        if (likes in 10000..999999) return ("${likes / 1000}K")
 
         if (likes >= 1000000) {
             if (likes % 1000000 == 0) {
                 return ("${likes / 1000000}M")
-            } else {
-                return ("%.1f".format(likes / 1000000.0) + "M")
             }
+            return ("%.1f".format(likes / 1000000.0) + "M")
         }
         return likes.toString()
     }
