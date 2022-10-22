@@ -19,4 +19,9 @@
     <string name="random_number">127</string>
     <string name="test_video_title">Video title</string>
     <string name="description_video">Attached video</string>
+    <string name="google_play_unavailable">Недоступно Google Api</string>
+    <string name="notification_user_liked">Пользователь %1$s лайкнул пост %2$s\'s</string>
+    <string name="notification_new_post">Пользователь %1$s опубликовал новый пост</string>
+    <string name="channel_remote_name">Серверное уведомление</string>
+    <string name="channel_remote_description">Уведомление от удаленного сервера</string>
 </resources>
