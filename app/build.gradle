@@ -59,7 +59,7 @@ dependencies {
     def fragment_version = "1.5.3"
     def firebase_version = "31.0.0"
     def play_services_base_version = "18.1.0"
-    def okhhttp_version = "4.9.1"
+    def okhttp_version = "4.10.0"
 
     implementation "androidx.core:core-ktx:$core_version"
     implementation "androidx.appcompat:appcompat:$appcompat_version"
@@ -79,7 +79,7 @@ dependencies {
     implementation platform("com.google.firebase:firebase-bom:$firebase_version")
     implementation "com.google.firebase:firebase-messaging-ktx"
     implementation "com.google.android.gms:play-services-base:$play_services_base_version"
-    implementation "com.squereup.okhttp:okhttp:$okhhttp_version"
+    implementation "com.squareup.okhttp3:okhttp:$okhttp_version"
 
 
     testImplementation "junit:junit:$junit_version"
